@@ -2,6 +2,7 @@ import json
 import mimetypes
 import requests
 from .base import ContentConverterBase, KeyProvider, RequestDecodeError
+from loguru import logger as log
 
 class JsonConverter(ContentConverterBase):
     supports_keys = True
