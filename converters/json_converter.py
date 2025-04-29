@@ -15,7 +15,9 @@ class JsonConverter(ContentConverterBase):
             log.debug("conv json: {0} \n conv keys: {1}",j,provider.keys )
         except json.decoder.JSONDecodeError as e:
             raise RequestDecodeError(e) from e
-        return JsonConverter.get_value(j, provider.keys)
+        result = JsonConverter.get_value(j, provider.keys)
+        log.debug("conv result: {0}",result)
+        return result
 
     @staticmethod
     def get_value(j: dict | None, keys: str):
