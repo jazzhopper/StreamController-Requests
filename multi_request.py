@@ -1,7 +1,7 @@
 import json
 import threading
 from src.backend.PluginManager.ActionBase import ActionBase
-from GtkHelper.StaticItemListComboRow import StaticItemListComboRow, ListItem
+from GtkHelper.ItemListComboRow import ItemListComboRow, ListItem
 from .converters import CONVERTERS, KeyProvider, RequestDecodeError
 
 # Import gtk modules
@@ -104,7 +104,7 @@ class MultiRequest(ActionBase, KeyProvider):
     def get_config_rows(self) -> list:
         lm = self.plugin_base.locale_manager
 
-        self.http_method_combo = StaticItemListComboRow(
+        self.http_method_combo = ItemListComboRow(
             [ListItem(m, m) for m in ["GET", "HEAD", "POST", "PUT", "DELETE"]],
             title=lm.get("actions.request.http_method.title"))
         self.url_entry = Adw.EntryRow(title="URL")
@@ -115,7 +115,7 @@ class MultiRequest(ActionBase, KeyProvider):
             ListItem(k, lm.get(f"convert.list_item.{k}"))
             for k in ["json", "xml", "plain_text"]
         ]
-        self.body_type_combo = StaticItemListComboRow(
+        self.body_type_combo = ItemListComboRow(
             _body_types,
             title=lm.get("actions.request.body_type.title"))
 
@@ -127,7 +127,7 @@ class MultiRequest(ActionBase, KeyProvider):
             ListItem(k, lm.get(f"convert.list_item.{k}"))
             for k in ["json", "xml", "plain_text", "ignore"]
         ]
-        self.reply_type_combo = StaticItemListComboRow(
+        self.reply_type_combo = ItemListComboRow(
             _reply_types,
             title=lm.get("actions.request.reply_type.title"))
 
