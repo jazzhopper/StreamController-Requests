@@ -70,6 +70,7 @@ class RequestWrapper:
                 headers = headers.strip()
                 if headers:
                     mapping = json.loads(headers)
+                    log.debug("mapping:\n{0}", mapping)
                     return { str(k).lower(): v for k, v in mapping }
             return {}
         except json.decoder.JSONDecodeError as e:
