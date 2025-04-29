@@ -1,7 +1,7 @@
 import json
 import threading
 from src.backend.PluginManager.ActionBase import ActionBase
-from GtkHelper.ItemListComboRow import ItemListComboRow, ListItem
+from GtkHelper.ItemListComboRow import ItemListComboRow, ItemListComboRowItemListComboRowListItem
 from .converters import CONVERTERS, KeyProvider, RequestDecodeError
 
 # Import gtk modules
@@ -105,14 +105,14 @@ class MultiRequest(ActionBase, KeyProvider):
         lm = self.plugin_base.locale_manager
 
         self.http_method_combo = ItemListComboRow(
-            [ListItem(m, m) for m in ["GET", "HEAD", "POST", "PUT", "DELETE"]],
+            [ItemListComboRowListItem(m, m) for m in ["GET", "HEAD", "POST", "PUT", "DELETE"]],
             title=lm.get("actions.request.http_method.title"))
         self.url_entry = Adw.EntryRow(title="URL")
         self.headers_entry = Adw.EntryRow(title="Header (json)")
 
         self.body_entry = Adw.EntryRow(title="Body")
         _body_types = [
-            ListItem(k, lm.get(f"convert.list_item.{k}"))
+            ItemListComboRowListItem(k, lm.get(f"convert.list_item.{k}"))
             for k in ["json", "xml", "plain_text"]
         ]
         self.body_type_combo = ItemListComboRow(
@@ -124,7 +124,7 @@ class MultiRequest(ActionBase, KeyProvider):
         self.auto_fetch_spinner.set_title("Auto Fetch (s)")
         self.auto_fetch_spinner.set_subtitle("0 to disable")
         _reply_types = [
-            ListItem(k, lm.get(f"convert.list_item.{k}"))
+            ItemListComboRowListItem(k, lm.get(f"convert.list_item.{k}"))
             for k in ["json", "xml", "plain_text", "ignore"]
         ]
         self.reply_type_combo = ItemListComboRow(
