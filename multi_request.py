@@ -81,7 +81,8 @@ class RequestWrapper:
         settings = self._action.get_settings()
         http_method = settings["http_method"]
         if http_method in _SUPPORTS_BODY:
-            body: str = (settings["body"] or "").strip()
+            log.debug("Settings\n {0}",settings)
+            body: str = (settings.get("body") or "").strip()
             log.debug("Body:\n{0}", body)
             if body:
                 if "content-type" not in headers:
