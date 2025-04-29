@@ -143,6 +143,8 @@ class MultiRequest(ActionBase, KeyProvider):
         # Connect signals
         self.http_method_combo.connect("notify::selected", self.on_http_method_changed)
         self.url_entry.connect("notify::text", self.on_url_changed)
+        self.body_entry.connect("notify::text", self.on_body_changed)
+        self.body_type_combo.connect("notify::selected", self.on_body_type_changed)
         self.headers_entry.connect("notify::text", self.on_headers_changed)
         self.reply_type_combo.connect("notify::selected", self.on_reply_type_changed)
         self.keys_entry.connect("notify::text", self.on_keys_changed)
@@ -176,6 +178,17 @@ class MultiRequest(ActionBase, KeyProvider):
     def on_url_changed(self, entry, *args):
         settings = self.get_settings()
         settings["url"] = entry.get_text()
+        self.set_settings(settings)
+    
+    def on_body_type_changed(self, entry, *args):
+        settings = self.get_settings()
+        settings["body_type"] = entry.get_selected_item().key
+        self.set_settings(settings)
+        
+    
+    def on_body_changed(self, entry, *args):
+        settings = self.get_settings()
+        settings["body"] = entry.get_text()
         self.set_settings(settings)
 
     def on_headers_changed(self, entry, *args):
