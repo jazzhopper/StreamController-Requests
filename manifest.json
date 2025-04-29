@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "thumbnail": "store/Thumbnail.png",
-    "id": "com_core447_Requests",
+    "id": "com_jazzhopper_Requests",
     "name": "Requests",
     "descriptions": {
         "en_US": "Send HTTP requests to control smart devices."
