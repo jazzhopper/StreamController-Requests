@@ -64,6 +64,7 @@ class RequestWrapper:
             raise VisibleError
 
         if text is not None:
+            log.debug("self.input_ident: {0}",self.input_ident)
             self._action.set_center_label(text=str(text))
 
     def _parse_headers(self, headers: str | None) -> dict:
