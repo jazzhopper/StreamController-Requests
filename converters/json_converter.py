@@ -12,7 +12,9 @@ class JsonConverter(ContentConverterBase):
         j = None
         try:
             j = json.loads(response.text)
-            j = {k.replace(' ', '_'): v for k, v in j.items()}
+            for k in list(j.keys()):
+                new_key = k.replace(' ', '_')
+                j[new_key] = j.pop(k)
             log.debug("conv_json: {0} \n conv keys: {1}",j,provider.keys )
         except json.decoder.JSONDecodeError as e:
             raise RequestDecodeError(e) from e
