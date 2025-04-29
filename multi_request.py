@@ -1,7 +1,7 @@
 import json
 import threading
 from src.backend.PluginManager.ActionBase import ActionBase
-from GtkHelper.ItemListComboRow import ItemListComboRow, ItemListComboRowItemListComboRowListItem
+from GtkHelper.ItemListComboRow import ItemListComboRow, ItemListComboRowListItem
 from .converters import CONVERTERS, KeyProvider, RequestDecodeError
 
 # Import gtk modules
