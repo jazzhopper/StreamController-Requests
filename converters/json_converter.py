@@ -14,7 +14,9 @@ class JsonConverter(ContentConverterBase):
             j = json.loads(response.text)
             for k in list(j.keys()):
                 new_key = k.replace(' ', '_')
+                log.debug("new key: {0}",new_key)
                 j[new_key] = j.pop(k)
+                
             log.debug("conv_json: {0} \n conv keys: {1}",j,provider.keys )
         except json.decoder.JSONDecodeError as e:
             raise RequestDecodeError(e) from e
