@@ -11,6 +11,7 @@ class JsonConverter(ContentConverterBase):
         j = None
         try:
             j = json.loads(response.text)
+            log.debug("conv json: {0} \n conv keys: {1}",j,provider.keys )
         except json.decoder.JSONDecodeError as e:
             raise RequestDecodeError(e) from e
         return JsonConverter.get_value(j, provider.keys)
