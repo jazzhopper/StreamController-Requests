@@ -55,6 +55,7 @@ class RequestWrapper:
         log.debug("_send Data:\n{0}", data)
         conv = CONVERTERS[settings["reply_type"]]
         response = requests.request(http_method, url=url, data=data, headers=headers, timeout=2)
+        log.debug("response: {0}",response)
         text = None
         try:
             text = conv.get_button_text(self._action, response)
