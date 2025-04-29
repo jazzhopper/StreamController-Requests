@@ -52,6 +52,7 @@ class RequestWrapper:
 
         headers = self._parse_headers(headers)
         data = self._get_body_data(headers)
+        log.debug("_send Data:\n{0}", data)
         conv = CONVERTERS[settings["reply_type"]]
         response = requests.request(http_method, url=url, data=data, headers=headers, timeout=2)
         text = None
@@ -69,8 +70,7 @@ class RequestWrapper:
             if headers:
                 headers = headers.strip()
                 if headers:
-                    mapping = json.loads(headers)
-                    log.debug("mapping:\n{0}", mapping)
+                    mapping = json.loads(headers)                    
                     return { str(k).lower(): v for k, v in mapping.items() }
             return {}
         except json.decoder.JSONDecodeError as e:
@@ -82,6 +82,7 @@ class RequestWrapper:
         http_method = settings["http_method"]
         if http_method in _SUPPORTS_BODY:
             body: str = (settings.get("body") or "").strip()
+            log.debug("Body:\n{0}", body)
             if body:
                 if "content-type" not in headers:
                     body_conv = CONVERTERS[settings["body_type"]]
